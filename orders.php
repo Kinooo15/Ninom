@@ -84,6 +84,9 @@ if (isset($updated_status) && isset($updated_order_id) && isset($updated_order_d
                 <li class="nav-item">
                   <a class="nav-link" href="product.php">Product </a>
                 </li>
+                <?php if ($user_type == 'admin'):?>
+                           <li class="nav-item"><a class="nav-link" href="admin.php?admin=true"><i aria-hidden="true"></i><span>Manage Products</span></a></li>
+                <?php endif ?>
                 <?php if ($user_type == 'customer'):?>
                            <li class="nav-item"><a class="nav-link" href="myorders.php?cart=true"><i aria-hidden="true"></i><span>My Orders</span></a></li>
                 <?php endif ?>
