@@ -17,7 +17,13 @@ $updated_order_date = $_REQUEST['order_date'] ?? null;
 
 if (isset($updated_status) && isset($updated_order_id) && isset($updated_order_date)) {
     $update_status_statement = "UPDATE purchase SET status='$updated_status' WHERE userid=$customer_id AND prodid=$updated_order_id AND date='$updated_order_date'";
-    mysqli_query($dlink, $update_status_statement);
+    $update_status_query = mysqli_query($dlink, $update_status_statement);
+
+    if ($update_status_query) {
+      $order_name = mysqli_fetch_assoc(mysqli_query($dlink, "SELECT productname FROM products where prodid=$updated_order_id"))['productname'];
+      $update_message_stmnt = "INSERT INTO messages VALUES(1, $customer_id, 'order of $order_name by Customer #$customer_id made on $updated_order_date is now $updated_status', NOW())";
+      mysqli_query($dlink, $update_message_stmnt);
+  }
 }
 
 ?>

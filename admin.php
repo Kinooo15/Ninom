@@ -47,6 +47,9 @@ if ($admin_action === "delete_product" && isset($_REQUEST["id"])) {
 } elseif ($admin_action === "new_category") {
     $newcategory_stmnt = "INSERT INTO products(prodcat, productname, productdesc, productlink, productimage, quantity, lastprice, ourprice) VALUES('New Category', 'New Product', 'Product Description', 'www.google.com', 'images/newproduct.jpg', 0, 0, 0)";
     mysqli_query($dlink, $newcategory_stmnt);
+    echo <<<HTML
+    <script>window.location.href="admin.php"</script>
+    HTML;
 } elseif ($admin_action === "edit_category") {
     $old_category = $_REQUEST['prod_cat'] ?? null;
 
@@ -150,7 +153,7 @@ if ($admin_action === "delete_product" && isset($_REQUEST["id"])) {
                 </li>
                 
                 <?php if ($user_type == 'admin'):?>
-                           <li class="nav-item"><a class="nav-link" href="admin.php?admin=true"><i aria-hidden="true"></i><span>Manage Products</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.php"><i aria-hidden="true"></i><span>Manage Products</span></a></li>
                 <?php endif ?>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -167,9 +170,8 @@ if ($admin_action === "delete_product" && isset($_REQUEST["id"])) {
 
   <!-- about section -->
 
-  <section class="about_section layout_padding">
-    <div class="container-fluid">
-        <div class="fashion_section" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+  <section class="fruit_section layout_padding">
+        <div class="fashion_section" style="display: flex; flex-direction: column;">
 
             <?php
             if ($product_action === "edit") {
@@ -349,8 +351,6 @@ if ($admin_action === "delete_product" && isset($_REQUEST["id"])) {
                 <a href="?admin_action=new_category"><button id="newcategory_btn">ADD A NEW CATEGORY</button></a>
             </div>
             <!-- End of database generated content -->
-        </div>                             
-    </div>
   </section>
 
   <!-- end about section -->

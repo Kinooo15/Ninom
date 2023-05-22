@@ -31,6 +31,7 @@ $user_type = $_COOKIE['type'] ?? '';
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  <script src="messages.js" defer></script>
 </head>
 
 <body>
@@ -95,7 +96,10 @@ $user_type = $_COOKIE['type'] ?? '';
                   <a class="nav-link" href="product.php">Product </a>
                 </li>
                 <?php if ($user_type == 'admin'):?>
-                           <li class="nav-item"><a class="nav-link" href="admin.php?admin=true"><i aria-hidden="true"></i><span>Manage Products</span></a></li>
+                           <li class="nav-item"><a class="nav-link" href="admin.php"><i aria-hidden="true"></i><span>Manage Products</span></a></li>
+                <?php endif ?>
+                <?php if (isset($_COOKIE['email'])) : ?>
+                  <li class="nav-item"><a class="nav-link" href="#" id="chat_btn">Chat</a></li>
                 <?php endif ?>
                 <?php
                 if (!isset($_COOKIE['email'])): ?>
@@ -339,6 +343,19 @@ $user_type = $_COOKIE['type'] ?? '';
 
   <!-- end info section -->
 
+  <!-- dialog section -->
+
+  <dialog id="chat_modal" style="border: 0; border-radius: 30px; padding: 70px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);">
+  <button id="close_btn" style="background-color: gray; padding: 7px 40px; border-radius: 30px; margin-bottom: 20px;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='gray'" onclick="this.style.backgroundColor='red'">Close</button>
+    <div id="messages" style="width: 700px; height: 500px; overflow-y: scroll;"></div>
+    <div class="message_box" style="display: flex; justify-content: center; align-items: center; gap: 30px; padding-top: 20px;">
+        <input type="text" name="message_input" id="message_input" style="border: 0; background-color: whitesmoke; width: 500px; padding: 7px 20px; border-radius: 30px;">
+        <button id="send_btn" style="background-color: gray; padding: 7px 40px; border-radius: 30px;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='gray'" onclick="this.style.backgroundColor='red'">Send</button>
+    </div>
+  </dialog>
+
+  <!-- end dialog section -->
+
 
   <!-- footer section -->
   <section class="container-fluid footer_section ">
@@ -348,7 +365,7 @@ $user_type = $_COOKIE['type'] ?? '';
     </p>
   </section>
   <!-- footer section -->
-
+  <!-- <script scr="messages.js"></script> -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
